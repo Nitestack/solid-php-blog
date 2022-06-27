@@ -5,12 +5,15 @@ import { Router } from "solid-app-router";
 import { MetaProvider } from "solid-meta";
 import { AppContextProvider } from "./AppContext";
 import App from "./App";
+import { LayoutProvider } from "./LayoutContext";
 
 render(() => (
     <MetaProvider>
         <Router>
             <AppContextProvider>
-                <App />
+                <LayoutProvider>
+                    <App />
+                </LayoutProvider>
             </AppContextProvider>
         </Router>
     </MetaProvider>

@@ -1,4 +1,4 @@
-import type { ParentComponent, Accessor, FlowComponent } from "solid-js";
+import type { ParentComponent, Accessor, FlowComponent, Component } from "solid-js";
 import { createContext, useContext, createSignal } from "solid-js";
 import { Meta as SolidMeta, Title as MetaTitle } from "solid-meta";
 import Constants from "./constants";
@@ -17,23 +17,23 @@ interface LayoutContextType {
     header: Accessor<string>;
 }
 
-const LayoutContext = createContext<LayoutContextType>({  } as LayoutContextType);
+const LayoutContext = createContext<LayoutContextType>({} as LayoutContextType);
 
 const Title: FlowComponent<{ sameHeader?: boolean; }, string> = (props) => {
-    const title = () => props.children;
-    setTitle(title());
-    if (props.sameHeader) setHeader(title());
+    const newTitle = () => props.children;
+    setTitle(newTitle());
+    if (props.sameHeader) setHeader(newTitle());
     return (
-        <MetaTitle> {props.children} </MetaTitle>
+        <MetaTitle> {newTitle()} - {Constants.APP_NAME} </MetaTitle>
     );
 };
 
-const Description: FlowComponent<{}, string> = (props) => {
-    const description = () => props.children;
-    setDescription(description());
+const Description: Component<{ children?: string }> = (props) => {
+    const newDescription = () => props.children;
+    if (newDescription()) setDescription(newDescription());
     return (
-        <SolidMeta name="description" content={description()}></SolidMeta>
-    )
+        <SolidMeta name="description" content={newDescription() ? newDescription() : description()} />
+    );
 };
 
 const Header: FlowComponent<{}, string> = (props) => {
@@ -41,14 +41,13 @@ const Header: FlowComponent<{}, string> = (props) => {
     return null;
 };
 
-const Meta: FlowComponent<{}, { [key: string]: string }> = (props) => {
+const Meta: FlowComponent<{}, { [key: string]: string; }> = (props) => {
     return null;
 };
 
 export const LayoutProvider: ParentComponent = (props) => {
-
     return (
-        <LayoutContext.Provider value={{ 
+        <LayoutContext.Provider value={{
             Title,
             Description,
             Header,
@@ -57,7 +56,7 @@ export const LayoutProvider: ParentComponent = (props) => {
             description,
             header
         }}>
-            
+            {props.children}
         </LayoutContext.Provider>
     );
 };
