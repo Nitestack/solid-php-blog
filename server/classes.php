@@ -1,10 +1,26 @@
 <?php
-    class Response {
+    class GetBlogsResponse {
         public bool $success;
         public ?string $error;
         public ?array $data;
         
         function __construct(bool $success, ?string $error, ?array $data) {
+            $this->success = $success;
+            if (!empty($error)) {
+                $this->error = $error;
+            }
+            if (!empty($data)) {
+                $this->data = $data;
+            }
+        }
+    }
+
+    class GetBlogResponse {
+        public bool $success;
+        public ?string $error;
+        public Blog $data;
+        
+        function __construct(bool $success, ?string $error, ?Blog $data) {
             $this->success = $success;
             if (!empty($error)) {
                 $this->error = $error;
@@ -38,11 +54,15 @@
     class BlogAuthor {
         public string $name;
         public ?string $url;
+        public ?string $imageUrl;
         
-        function __construct(string $name, ?string $url) {
+        function __construct(string $name, ?string $url, ?string $imageUrl) {
             $this->name = $name;
             if (!empty($url)) {
                 $this->url = $url;
+            }
+            if (!empty($imageUrl)) {
+                $this->imageUrl = $imageUrl;
             }
         }
     }

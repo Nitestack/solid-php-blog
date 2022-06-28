@@ -2,7 +2,7 @@ import { lazy } from "solid-js";
 import type { RouteDefinition } from "solid-app-router";
 
 import Home from "./pages/home";
-import { BlogData } from "./pages/blog.data";
+import { GetBlogs, GetBlog, CreateBlog } from "./pages/blog.data";
 
 export const routes: RouteDefinition[] = [
     {
@@ -14,12 +14,27 @@ export const routes: RouteDefinition[] = [
         component: lazy(() => import("./pages/about"))
     },
     {
-        path: "**",
-        component: lazy(() => import("./errors/404"))
+        path: "/blogs",
+        children: [
+            {
+                path: "/",
+                component: lazy(() => import("./pages/blogs")),
+                data: GetBlogs
+            },
+            {
+                path: "/:slug",
+                component: lazy(() => import("./pages/blog")),
+                data: GetBlog,
+            },
+            {
+                path: "/create",
+                component: lazy(() => import("./pages/createBlog")),
+                data: CreateBlog
+            }
+        ]
     },
     {
-        path: "/blogs/:slug",
-        component: lazy(() => import("./pages/blog")),
-        data: BlogData
+        path: "**",
+        component: lazy(() => import("./errors/404"))
     }
 ];
