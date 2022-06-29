@@ -6,5 +6,8 @@ export default defineConfig({
     build: {
         target: 'esnext',
         polyfillDynamicImport: false,
+    },
+    define: {
+        process: { env: { NODE_DEBUG: false } }
     }
 });

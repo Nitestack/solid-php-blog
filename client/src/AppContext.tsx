@@ -8,7 +8,7 @@ interface AppContextType {
 
 const AppContext = createContext<AppContextType>({} as AppContextType);
 
-export const AppContextProvider: ParentComponent = (props) => {
+export const AppProvider: ParentComponent = (props) => {
     //Page Theme Settings
     const [theme, setTheme] = createSignal<"light" | "dark">("light");
     function toggleTheme() {

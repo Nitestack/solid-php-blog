@@ -15,6 +15,18 @@
         }
     }
 
+    class CreateBlogResponse {
+        public bool $success;
+        public ?string $error;
+        
+        function __construct(bool $success, ?string $error) {
+            $this->success = $success;
+            if (!empty($error)) {
+                $this->error = $error;
+            }
+        }
+    }
+
     class GetBlogResponse {
         public bool $success;
         public ?string $error;

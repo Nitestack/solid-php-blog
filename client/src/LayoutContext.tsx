@@ -9,7 +9,7 @@ const [header, setHeader] = createSignal(Constants.APP_NAME);
 
 interface LayoutContextType {
     Title: FlowComponent<{ sameHeader?: boolean; }, string>;
-    Description: FlowComponent<{}, string>;
+    Description: Component<{ children?: string }>;
     Header: FlowComponent<{}, string>;
     Meta: FlowComponent<{}, { [key: string]: string; }>;
     title: Accessor<string>;

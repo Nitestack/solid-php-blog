@@ -1,5 +1,6 @@
 import { RouteDataFunc, useParams } from "solid-app-router";
 import { createResource, splitProps } from "solid-js";
+import type { Setter } from "solid-js";
 import axios from "axios";
 import uniqid from "uniqid";
 
@@ -34,16 +35,21 @@ interface Response<DataType = any> {
     data?: DataType;
 }
 
-type BlogType<O> = O & { loading: boolean; error: any; };
+type BlogType<Property, DataType> = Property & { 
+    loading: boolean; 
+    error: any; 
+    refetch: (info?: unknown) => Response<DataType> | Promise<Response<DataType>> | undefined | null; 
+    mutate: Setter<Response<DataType>> 
+};
 
 export type GetBlogsType = BlogType<{
     blogs: {
         [key: string]: Blog;
     };
-}>;
+}, Array<DatabaseBlog>>;
 
 export const GetBlogs: RouteDataFunc<GetBlogsType> = () => {
-    const [response] = createResource<Response<Array<DatabaseBlog>>>(async () => axios.get("http://localhost/blog/get_blogs.php").then(res => res.data));
+    const [response, { refetch, mutate }] = createResource<Response<Array<DatabaseBlog>>>(async () => axios.get("http://localhost/blog/get_blogs.php").then(res => res.data));
     return {
         get blogs() {
             if (response.loading || response.error) return {};
@@ -51,7 +57,7 @@ export const GetBlogs: RouteDataFunc<GetBlogsType> = () => {
                 const newBlogs: {
                     [key: string]: Blog;
                 } = {};
-                for (const blog of response().data) {
+                for (const blog of response().data.sort((a, b) => new Date(b.createdAt.date).getTime() - new Date(a.createdAt.date).getTime())) {
                     const [local, others] = splitProps(blog, ["id", "createdAt"]);
                     newBlogs[local.id] = {
                         ...others,
@@ -66,17 +72,23 @@ export const GetBlogs: RouteDataFunc<GetBlogsType> = () => {
         },
         get error() {
             return response.error;
+        },
+        get refetch() {
+            return refetch;
+        },
+        get mutate() {
+            return mutate;
         }
     };
 };
 
 export type GetBlogType = BlogType<{
     blog: Blog;
-}>;
+}, DatabaseBlog>;
 
 export const GetBlog: RouteDataFunc<GetBlogType> = () => {
     const params = useParams<{ slug: string; }>();
-    const [response] = createResource<Response<DatabaseBlog>, string>(() => params.slug, async slug => {
+    const [response, { refetch, mutate }] = createResource<Response<DatabaseBlog>, string>(() => params.slug, async slug => {
         const formData = new FormData();
         formData.set("id", slug);
         return axios.post("http://localhost/blog/get_blog.php", formData).then(res => res.data);
@@ -97,6 +109,12 @@ export const GetBlog: RouteDataFunc<GetBlogType> = () => {
         },
         get error() {
             return response.error;
+        },
+        get refetch() {
+            return refetch;
+        },
+        get mutate() {
+            return mutate;
         }
     };
 };
@@ -159,21 +177,3 @@ export const data: RandomData[] = [
         title: "eu enim. Etiam imperdiet dictum magna. Ut"
     }
 ];
-
-
-export type CreateBlogType = BlogType<{
-    blog: Blog;
-}>;
-
-export const CreateBlog: RouteDataFunc<CreateBlogType> = () => {
-    const [response] = createResource<DatabaseBlog>(() => {
-        for (const dummyData of data) {
-            const formData = new FormData();
-            for (const key of Object.keys(dummyData)) formData.set(key, dummyData[key]);
-            formData.set("blogID", uniqid("blog-"));
-            axios.post("http://localhost/blog/create_blog.php")
-        };
-        return {};
-    });
-    return null;
-};
