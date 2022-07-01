@@ -1,8 +1,8 @@
 <?php
+    //Allow access to localhost on PORT 3000
     header("Access-Control-Allow-Origin: http://localhost:3000");
-    
+    //Classes
     include "classes.php";
-    
     //Connection
     $mysqli = new mysqli("localhost", "root", null, "php-solid-blog");
     if ($mysqli->connect_error) {
@@ -19,10 +19,9 @@
         $date = new DateTime(); 
         $date->setTimestamp($row["created_timestamp"]);
         $blog = new Blog($row["blog_id"], new BlogAuthor($row["author_name"], $row["author_url"], $row["author_image_url"]), $row["image_url"], $row["title"], $row["description"], $row["content"], $date);
+        echo json_encode(new GetBlogResponse(true, null, $blog));
     } else {
         echo json_encode(new GetBlogResponse(false, "Didn't found the blog with the ID: '". $blog_id ."'", null));
-        exit;
-    };
-    echo json_encode(new GetBlogResponse(true, null, $blog));
+    }
     exit;
 ?>

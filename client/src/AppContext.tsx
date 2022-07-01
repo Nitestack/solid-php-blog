@@ -1,34 +1,45 @@
-import type { Accessor, ParentComponent, Resource, Setter } from "solid-js";
-import { createContext, useContext, onMount, createSignal, createResource } from "solid-js";
+import { createI18nContext, I18nContext } from "@solid-primitives/i18n";
+import type { ParentComponent } from "solid-js";
+import { useLocation } from "solid-app-router";
+import { createContext, useContext, onMount } from "solid-js";
+import deLanguage from "./lang/de.json";
+import enLanguage from "./lang/en.json";
+import Cookies from "js-cookie";
 
-interface AppContextType {
-    theme: Accessor<"light" | "dark">;
-    toggleTheme: () => () => void;
-}
-
-const AppContext = createContext<AppContextType>({} as AppContextType);
+const AppContext = createContext({});
 
 export const AppProvider: ParentComponent = (props) => {
-    //Page Theme Settings
-    const [theme, setTheme] = createSignal<"light" | "dark">("light");
-    function toggleTheme() {
-        return () => {
-            setTheme(currentTheme => {
-                const newTheme = currentTheme == "dark" ? "light" : "dark";
-                document.documentElement.setAttribute("data-theme", newTheme);
-                return newTheme;
-            });
+    //Language support
+    let lang: string;
+    const langCookie = Cookies.get("language");
+    if (langCookie) {
+        lang = langCookie;
+    } else {
+        const browserLang = navigator.language.slice(0, 2);
+        const location = useLocation();
+        if (location.query.locale) {
+            lang = location.query.locale;
+        } else {
+            lang = browserLang;
         };
+        Cookies.set("language", lang, {
+            expires: new Date(Date.now() + 2 * 365 * 24 * 60 * 60 * 1000)
+        });
     };
+    const i18n = createI18nContext({
+        de: deLanguage,
+        en: enLanguage
+    }, lang && lang.toLowerCase() == "de" ? "de" : "en");
+    //on page mounted
     onMount(() => {
-        setTheme(matchMedia('(prefers-color-scheme: dark)').matches ? "dark" : "light");
+        document.documentElement.setAttribute("data-theme", "dark");
     });
+    //Render
     return (
-        <AppContext.Provider value={{
-            theme,
-            toggleTheme
-        }}>
-            {props.children}
+        <AppContext.Provider value={{}}>
+            <I18nContext.Provider value={i18n}>
+                {props.children}
+            </I18nContext.Provider>
         </AppContext.Provider>
     );
 };

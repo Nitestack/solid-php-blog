@@ -4,12 +4,16 @@ import Footer from "./components/Footer";
 import Constants from "./constants";
 import { useLayout } from "./LayoutContext";
 const Layout: ParentComponent = (props) => {
+    //Page info displayed
     const { header, description } = useLayout();
+    //Routes for Navbar and Footer
     const routes: {
         [key: string]: string;
     } = {
-        "About": "/about"
+        "Blogs": "/blogs",
+        "Admin": "/admin"
     };
+    //Render
     return (
         <>
             <div class="min-h-screen flex flex-col">

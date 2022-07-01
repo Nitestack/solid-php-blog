@@ -10,10 +10,6 @@ export const routes: RouteDefinition[] = [
         component: Home,
     },
     {
-        path: "/about",
-        component: lazy(() => import("./pages/about"))
-    },
-    {
         path: "/blogs",
         children: [
             {
@@ -41,13 +37,33 @@ export const routes: RouteDefinition[] = [
             },
             {
                 path: "/update",
-                component: lazy(() => import("./pages/admin/updateBlog")),
-                data: GetBlogs
+                children: [
+                    {
+                        path: "/",
+                        component: lazy(() => import("./pages/admin/updateBlogOverview")),
+                        data: GetBlogs
+                    },
+                    {
+                        path: "/:slug",
+                        component: lazy(() => import("./pages/admin/updateBlog")),
+                        data: GetBlog
+                    }
+                ]
             },
             {
                 path: "/delete",
-                component: lazy(() => import("./pages/admin/deleteBlog")),
-                data: GetBlogs
+                children: [
+                    {
+                        path: "/",
+                        component: lazy(() => import("./pages/admin/deleteBlogOverview")),
+                        data: GetBlogs
+                    },
+                    {
+                        path: "/:slug",
+                        component: lazy(() => import("./pages/admin/deleteBlog")),
+                        data: GetBlog
+                    }
+                ]
             }
         ]
     },

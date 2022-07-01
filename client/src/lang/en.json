@@ -1,0 +1,66 @@
+{
+    "APP_DESCRIPTION": "{{ APP_NAME }} is a blog built with a PHP server and SolidJS, a frontend JavaScript framework.",
+    "ADMIN": "Admin",
+    "FOOTER_COPYRIGHT": "All rights reserved.",
+    "WELCOME_PAGE": "Welcome to {{ APP_NAME }}!",
+    "BLOGS_PAGE_DESCRIPTION": "Here you can read all blogs in preview mode. Click to read a complete blog.",
+    "VIEW_ALL_BLOGS": "View all blogs",
+
+    "ADMIN_ACTIONS": "Administration - Actions",
+    "ADMIN_DESCRIPTION": "Please choose one of the actions to CREATE, UPDATE or DELETE a blog!",
+
+    "CREATE_BLOG": "Create a blog",
+    "CREATE_BLOG_DESCRIPTION": "Create a blog to write about your interests or other topics!",
+    "CREATE_BUTTON": "Create",
+
+    "UPDATE_BLOG": "Update a blog",
+    "UPDATE_BLOG_DESCRIPTION": "Update the blog as you would like to be updated",
+    "UPDATE_BLOG_OVERVIEW_DESCRIPTION": "Here you can see all blogs in preview mode. Click to update a blog.",
+    "UPDATE_BUTTON": "Update",
+
+    "DELETE_BLOG": "Delete a blog",
+    "DELETE_BLOG_DESCRIPTION": "Confirm that you want to delete the blog",
+    "DELETE_BLOG_OVERVIEW_DESCRIPTION": "Here you can see all blogs in preview mode. Click to get redirected to the confirmation page",
+    "DELETE_BLOG_BUTTON": "Yes, delete the blog",
+
+    "RETURN_TO_ADMIN_PAGE_BUTTON": "Return to the administration panel",
+    "RETURN_TO_BLOG_OVERVIEW_BUTTON": "Return to blog overview",
+
+    "ERROR_PAGE": "Something's missing.",
+    "ERROR_PAGE_DESCRIPTION": "Sorry, we can't find that page. You'll find lots to explore on the home page.",
+    "ERROR_BUTTON": "Back to",
+
+
+    "ARTICLE": "Article",
+    "TODAY": "Today",
+    "YESTERDAY": "Yesterday",
+    "DAYS_AGO": "{{ DAYS }} days ago",
+    "READ_MORE": "Read more",
+
+
+    "MAX_CHAR": "Max. {{ CHARACTERS }} characters are allowed!",
+    "MAX_CHAR_INFO": "Max. {{ CHARACTERS }} characters {{ ADDITIONAL_TEXT }}",
+    "PROVIDE_SOMETHING": "Please provide {{ PROVIDER }}!",
+    "INPUT_PLACEHOLDER": "Enter {{ PROVIDER }} here",
+    "INPUT_PLACEHOLDER_OPTIONAL": "Enter optional {{  }}",
+
+    "AUTHOR": "Author",
+    "AUTHOR_NAME_PROVIDE": "an author name",
+    "AUTHOR_URL_PROVIDE": "an author URL",
+    "AUTHOR_IMAGE_URL_PROVIDE": "an author avatar URL",
+    "AUTHOR_NAME_ADDITIONAL_TEXT": "for author name",
+
+    "TITLE": "Title",
+    "TITLE_PROVIDE": "a title",
+
+    "DESCRIPTION": "Description",
+    "DESCRIPTION_PROVIDE": "a description",
+
+    "CONTENT": "Content",
+    "CONTENT_PROVIDE": "a content",
+
+    "IMAGE": "Image",
+    "IMAGE_PROVIDE": "an image URL",
+
+    "PREVIEW": "Preview"
+}

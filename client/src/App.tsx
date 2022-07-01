@@ -5,7 +5,9 @@ import { routes } from "./router";
 import Layout from "./Layout";
 
 const App: Component = () => {
+    //Routing system
     const Route = useRoutes(routes);
+    //Render app
     return (
         <Layout>
             <Suspense>

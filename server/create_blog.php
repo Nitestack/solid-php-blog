@@ -1,6 +1,7 @@
 <?php
+    //Allow access to localhost on PORT 3000
     header("Access-Control-Allow-Origin: http://localhost:3000");
-    
+    //Classes
     include "classes.php";
     //Connection
     $mysqli = new mysqli("localhost", "root", null, "php-solid-blog");
@@ -20,10 +21,12 @@
     $createdAt = time();
     //Query 
     $sql = "INSERT INTO articles (blog_id, author_name, author_url, author_image_url, title, description, content, created_timestamp, image_url) VALUES ('$id','$authorName','$authorUrl','$authorImageUrl','$title','$description','$content','$createdAt','$imageUrl')";
+    //Data Processing
     if ($mysqli->query($sql) == true) {
-        echo json_encode(new CreateBlogResponse(true, null));
-    } else {
-        echo json_encode(new CreateBlogResponse(false, "Couldn't create blog"));
+        echo json_encode(new CreateUpdateDeleteBlogResponse(true, null));
+    }
+    else {
+        echo json_encode(new CreateUpdateDeleteBlogResponse(false, "Couldn't create blog"));
     }
     exit;
 ?>

@@ -1,16 +1,17 @@
+import { useI18n } from "@solid-primitives/i18n";
 import type { ParentComponent, Accessor, FlowComponent, Component } from "solid-js";
 import { createContext, useContext, createSignal } from "solid-js";
 import { Meta as SolidMeta, Title as MetaTitle } from "solid-meta";
 import Constants from "./constants";
 
 const [title, setTitle] = createSignal(Constants.APP_NAME);
-const [description, setDescription] = createSignal(Constants.APP_DESCRIPTION);
+const [description, setDescription] = createSignal("");
 const [header, setHeader] = createSignal(Constants.APP_NAME);
 
 interface LayoutContextType {
     Title: FlowComponent<{ sameHeader?: boolean; }, string>;
-    Description: Component<{ children?: string }>;
-    Header: FlowComponent<{}, string>;
+    Description: Component<{ children?: string; }>;
+    Header: Component<{ children?: string; }>;
     Meta: FlowComponent<{}, { [key: string]: string; }>;
     title: Accessor<string>;
     description: Accessor<string>;
@@ -29,15 +30,18 @@ const Title: FlowComponent<{ sameHeader?: boolean; }, string> = (props) => {
 };
 
 const Description: Component<{ children?: string }> = (props) => {
-    const newDescription = () => props.children;
-    if (newDescription()) setDescription(newDescription());
+    const [translate] = useI18n();
+    const newDescription = () => props.children || translate("APP_DESCRIPTION", {
+        APP_NAME: Constants.APP_NAME
+    });
+    setDescription(newDescription());
     return (
-        <SolidMeta name="description" content={newDescription() ? newDescription() : description()} />
+        <SolidMeta name="description" content={newDescription()} />
     );
 };
 
-const Header: FlowComponent<{}, string> = (props) => {
-    setHeader(props.children);
+const Header: Component<{ children?: string; }> = (props) => {
+    if (props.children) setHeader(props.children);
     return null;
 };
 
@@ -46,6 +50,11 @@ const Meta: FlowComponent<{}, { [key: string]: string; }> = (props) => {
 };
 
 export const LayoutProvider: ParentComponent = (props) => {
+    const [translate] = useI18n();
+    setDescription(translate("APP_DESCRIPTION", {
+        APP_NAME: Constants.APP_NAME
+    }));
+    //Render
     return (
         <LayoutContext.Provider value={{
             Title,

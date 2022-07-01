@@ -1,0 +1,66 @@
+{
+    "APP_DESCRIPTION": "{{ APP_NAME }} ist ein Blog, welcher mit einem PHP-Server und SolidJS, einem Frontend-JavaScript-Framework, läuft.",
+    "ADMIN": "Administration",
+    "FOOTER_COPYRIGHT": "Alle Rechte vorbehalten.",
+    "WELCOME_PAGE": "Willkommen zu {{ APP_NAME }}!",
+    "BLOGS_PAGE_DESCRIPTION": "Hier sieht man alle Blogs mit Vorschau. Klick auf einen, um ihn komplett lesen zu können",
+    "VIEW_ALL_BLOGS": "Siehe alle Blogs",
+
+    "ADMIN_ACTIONS": "Administration - Aktionen",
+    "ADMIN_DESCRIPTION": "Wähle einer der unten aufgelisteten Aktionen, um einen Blog zu ERSTELLEN, VERÄNDERN oder zu LÖSCHEN!",
+
+    "CREATE_BLOG": "Einen Blog erstellen",
+    "CREATE_BLOG_DESCRIPTION": "Erstelle einen Blog um über deine Interessen oder andere Themen zu schreiben!",
+    "CREATE_BUTTON": "Erstellen",
+
+    "UPDATE_BLOG": "Einen Blog verändern",
+    "UPDATE_BLOG_DESCRIPTION": "Verändere den Blog so wie du willst",
+    "UPDATE_BLOG_OVERVIEW_DESCRIPTION": "Hier sieht man alle Blogs mit Vorschau. Klick auf einen, um ihn zu verändern",
+    "UPDATE_BUTTON": "Verändern",
+
+    "DELETE_BLOG": "Einen Blog löschen",
+    "DELETE_BLOG_DESCRIPTION": "Bestätige dass du diesen Blog löschen möchtest",
+    "DELETE_BLOG_OVERVIEW_DESCRIPTION": "Hier sieht man alle Blogs mit Vorschau. Klick auf einen, um zur Bestätigungsseite zu kommen",
+    "DELETE_BLOG_BUTTON": "Ja, lösche den Blog",
+
+    "RETURN_TO_ADMIN_PAGE_BUTTON": "Zurück zum Administration-Panel",
+    "RETURN_TO_BLOG_OVERVIEW_BUTTON": "Zurück zur Blog-Übersicht",
+
+    "ERROR_PAGE": "Irgendetwas fehlt.",
+    "ERROR_PAGE_DESCRIPTION": "Entschuldige, wir können diese Seite nicht finden. Du wirst auf der Homepage viel entdecken.",
+    "ERROR_BUTTON": "Zurück zur",
+
+
+    "ARTICLE": "Artikel",
+    "TODAY": "Heute",
+    "YESTERDAY": "Gestern",
+    "DAYS_AGO": "vor {{ DAYS }} Tagen",
+    "READ_MORE": "Weiterlesen",
+
+
+    "MAX_CHAR": "Max. {{ CHARACTERS }} Zeichen erlaubt!",
+    "MAX_CHAR_INFO": "Max. {{ CHARACTERS }} Zeichen {{ ADDITIONAL_TEXT }}",
+    "PROVIDE_SOMETHING": "Bitte {{ PROVIDER }} angeben!",
+    "INPUT_PLACEHOLDER": "Hier {{ PROVIDER }} angeben",
+    "INPUT_PLACEHOLDER_OPTIONAL": "Optional {{ PROVIDER }} angeben",
+
+    "AUTHOR": "Autor",
+    "AUTHOR_NAME_PROVIDE": "einen Autornamen",
+    "AUTHOR_URL_PROVIDE": "eine Autor-URL",
+    "AUTHOR_IMAGE_URL_PROVIDE": "eine Autor-Avatar-URL",
+    "AUTHOR_NAME_ADDITIONAL_TEXT": "für den Autornamen",
+
+    "TITLE": "Titel",
+    "TITLE_PROVIDE": "einen Titel",
+
+    "DESCRIPTION": "Beschreibung",
+    "DESCRIPTION_PROVIDE": "eine Beschreibung",
+
+    "CONTENT": "Inhalt",
+    "CONTENT_PROVIDE": "einen Inhalt",
+
+    "IMAGE": "Bild",
+    "IMAGE_PROVIDE": "eine Bild URL",
+
+    "PREVIEW": "Vorschau"
+}
